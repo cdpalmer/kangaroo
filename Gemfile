@@ -8,6 +8,19 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'pry-rails'
+gem 'figaro'
+
+gem 'factory_girl'
+gem 'factory_girl_rails'
+gem 'ffaker'
+
+group :test do
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'json_spec'
+  gem 'shoulda-matchers'
+end
 
 group :doc do
   gem 'sdoc', require: false
