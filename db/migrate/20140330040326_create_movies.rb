@@ -3,7 +3,7 @@ class CreateMovies < ActiveRecord::Migration
     create_table :movies do |t|
       t.string  'description'
       t.string  'title'
-      t.time    'duration'
+      t.string  'duration'
 
       t.timestamps
     end

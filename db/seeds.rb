@@ -8,6 +8,6 @@
 Movie.create(
   title: 'Heat',
   description: 'Hilarious movie with Sandra Bullock and Milissa McCarthy',
-  duration: 2.hours
+  duration: '2 hours'
 )
 
