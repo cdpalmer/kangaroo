@@ -1,6 +1,4 @@
-class MoviesController < BaseController
-  respond_to :html
-
+class MoviesController < ApplicationController
   def index
     @movies = Movie.all
   end
