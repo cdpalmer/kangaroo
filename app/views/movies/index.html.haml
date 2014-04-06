@@ -1,10 +1,16 @@
 %h1.title Movies
 
 - if !@movies.empty?
-  - @movies.each do |movie|
-    %p
-      = movie.title
-    %p
-      = movie.description
+  %table.movie-table
+    %thead
+      %th Title
+      %th Short Description
+      %th Duration (in hours)
+    %tbody
+      - @movies.each do |movie|
+        %tr.movie{data_id: movie.id}
+          %td= movie.title
+          %td= movie.description
+          %td= movie.duration
 - else
   .empty-table You don't have any movies stored.

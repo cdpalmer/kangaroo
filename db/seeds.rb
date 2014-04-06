@@ -12,7 +12,7 @@ Movie.create(
 )
 Movie.create(
   title: 'Oceans 11',
-  description: 'A group of eleve individuals plan and execute a huge heist on a Las Vegas casino',
+  description: 'A group of eleven individuals plan and execute a huge heist on a Las Vegas casino',
   duration: 2.33
 )
 Movie.create(
