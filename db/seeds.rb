@@ -8,6 +8,16 @@
 Movie.create(
   title: 'Heat',
   description: 'Hilarious movie with Sandra Bullock and Milissa McCarthy',
-  duration: '2 hours'
+  duration: 2
+)
+Movie.create(
+  title: 'Oceans 11',
+  description: 'A group of eleve individuals plan and execute a huge heist on a Las Vegas casino',
+  duration: 2.33
+)
+Movie.create(
+  title: 'Oceans 12',
+  description: 'The Oceans 11 group gets in trouble after their Vegas heist.',
+  duration: 2.5
 )
 
