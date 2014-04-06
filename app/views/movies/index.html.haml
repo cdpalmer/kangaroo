@@ -1,7 +1,10 @@
-%h1 Movies
+%h1.title Movies
 
-- @movies.each do |movie|
-  %p
-    = movie.title
-  %p
-    = movie.description
+- if !@movies.empty?
+  - @movies.each do |movie|
+    %p
+      = movie.title
+    %p
+      = movie.description
+- else
+  .empty-table You don't have any movies stored.
