@@ -5,12 +5,12 @@
     %thead
       %th Title
       %th Short Description
-      %th Duration (in hours)
+      %th Duration (in minutes)
     %tbody
       - @movies.each do |movie|
         %tr.movie{data_id: movie.id}
           %td= movie.title
           %td= movie.description
-          %td= movie.duration
+          %td.duration= movie.duration.to_int
 - else
   .empty-table You don't have any movies stored.
