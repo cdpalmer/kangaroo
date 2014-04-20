@@ -4,6 +4,7 @@ class CreateMovies < ActiveRecord::Migration
       t.string  'description'
       t.string  'title'
       t.integer 'duration'
+      t.integer 'theatre_id'
 
       t.timestamps
     end

@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(version: 20140420002513) do
   create_table "movies", force: true do |t|
     t.string   "description"
     t.string   "title"
-    t.float    "duration"
+    t.integer  "duration"
+    t.integer  "theatre_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
