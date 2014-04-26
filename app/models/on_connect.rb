@@ -6,7 +6,8 @@ class OnConnect
   end
 
   def find_by_zipcode(zip)
-    output = Net::HTTP.get(@endpoint + "?zip=#{zip}&api_key=zwhkp5tk7wenzuvmnavq5f8k")
+    uri = @endpoint + "?zip=#{zip}&api_key=zwhkp5tk7wenzuvmnavq5f8k"
+    output = Net::HTTP.get(uri)
     output
   end
 end
