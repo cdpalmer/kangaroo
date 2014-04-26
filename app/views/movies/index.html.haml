@@ -16,3 +16,5 @@
           %td= movie.theatre.title
 - else
   .empty-table You don't have any movies stored.
+
+= @movie_service.find_by_zipcode(80222)
