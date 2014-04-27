@@ -13,6 +13,7 @@ gem 'figaro'
 gem 'haml-rails'
 gem 'foundation-rails'
 gem 'faraday'
+gem 'rspec-rails'
 
 gem 'factory_girl'
 gem 'factory_girl_rails'

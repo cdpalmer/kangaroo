@@ -20,4 +20,5 @@
 .row
   .large-12.columns
     .panel
-      %pre= JSON.pretty_generate(JSON.parse(@output))
+      %pre= JSON.pretty_generate(@output)
+    #{@output}
