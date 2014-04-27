@@ -53,6 +53,8 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    faraday (0.8.9)
+      multipart-post (~> 1.2.0)
     ffaker (1.23.0)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -87,6 +89,7 @@ GEM
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.9.2)
+    multipart-post (1.2.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     polyglot (0.3.4)
@@ -170,6 +173,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   factory_girl
   factory_girl_rails
+  faraday
   ffaker
   figaro
   foundation-rails

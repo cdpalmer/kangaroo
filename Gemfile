@@ -12,6 +12,7 @@ gem 'pry-rails'
 gem 'figaro'
 gem 'haml-rails'
 gem 'foundation-rails'
+gem 'faraday'
 
 gem 'factory_girl'
 gem 'factory_girl_rails'

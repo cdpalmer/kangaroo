@@ -17,4 +17,9 @@
 - else
   .empty-table You don't have any movies stored.
 
-= @movie_service.find_by_zipcode(80222)
+.row
+  .large-12.columns
+    .panel
+      = JSON.parse(@output, {'object_class' => 'Hash'})
+      -# = JSON.pretty_generate(JSON.parse(@output))
+      -# = JSON.parse(@output)
