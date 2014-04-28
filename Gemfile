@@ -13,31 +13,19 @@ gem 'figaro'
 gem 'haml-rails'
 gem 'foundation-rails'
 gem 'faraday'
-gem 'rspec-rails'
-
-gem 'factory_girl'
-gem 'factory_girl_rails'
-gem 'ffaker'
 
 group :test do
+  gem 'database_cleaner'
+  gem 'rspec-rails'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'json_spec'
   gem 'shoulda-matchers'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
 end
 
 group :doc do
   gem 'sdoc', require: false
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
