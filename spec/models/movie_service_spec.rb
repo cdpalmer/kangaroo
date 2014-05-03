@@ -5,18 +5,15 @@ describe MovieService do
     let(:onconnect_payload) { WebmockOnconnectResponse.zipcode_response(80222) }
 
     before :each do
-      output = subject.parse_zipcode_payload(onconnect_payload)
-      binding.pry
-
-      output = output
+      subject.parse_zipcode_payload(onconnect_payload)
     end
 
     it 'creates the correct movies' do
-      expect(Movies.count).to eq(10)
+      expect(Movie.count).to eq(10)
     end
 
     it 'creates the correct movies' do
-      expect(Theatres.count).to eq(8)
+      expect(Theatre.count).to eq(8)
     end
   end
 end

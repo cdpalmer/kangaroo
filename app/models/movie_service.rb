@@ -8,6 +8,6 @@ class MovieService
   end
 
   def parse_zipcode_payload(payload)
-    JSON.parse(payload).fetch('title')
+    @remote_movie_service.parse_zipcode_payload(payload)
   end
 end
