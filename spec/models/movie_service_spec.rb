@@ -13,7 +13,7 @@ describe MovieService do
     end
 
     it 'creates the correct movies' do
-      expect(Theatre.count).to eq(8)
+      expect(Theatre.count).to eq(7)
     end
   end
 end

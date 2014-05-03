@@ -17,8 +17,22 @@ class OnConnect
   end
 
   def parse_zipcode_payload(payload)
-    JSON.parse(payload).each do |movie|
-      Movie.create(title: movie['title'], description: movie['shortDescription'], duration: 92, theatre_id: 2)
+    begin
+      JSON.parse(payload).each do |movie|
+        movie['showtimes'].each do |showtime|
+          if Theatre.where(remote_id: showtime['theatre']['id']).empty?
+            Theatre.create(remote_id: showtime['theatre']['id'], title: showtime['name'])
+          end
+        end
+
+        # This is until I get the showtime model created, so each movie
+        # will only be linked to the last theatre created
+        tid = Theatre.last.id
+
+        Movie.create(title: movie['title'], description: movie['shortDescription'], duration: 92, theatre_id: tid)
+      end
+    rescue MultiJson::LoadError => error
+      raise error
     end
   end
 end
