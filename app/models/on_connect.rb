@@ -5,7 +5,6 @@ class OnConnect
     @endpoint = "http://data.tmsapi.com/v1/movies/showings/"
     @connection = Faraday.new(url: @endpoint) do |faraday|
       faraday.request   :url_encoded
-      # faraday.response  :logger
       faraday.adapter   Faraday.default_adapter
     end
   end
@@ -19,7 +18,7 @@ class OnConnect
 
   def parse_zipcode_payload(payload)
     JSON.parse(payload).each do |movie|
-      Movie.create(title: movie['title'], description: movie['shortDescription'], duration: 92)
+      Movie.create(title: movie['title'], description: movie['shortDescription'], duration: 92, theatre_id: 2)
     end
   end
 end

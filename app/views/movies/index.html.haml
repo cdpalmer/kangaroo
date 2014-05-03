@@ -16,9 +16,3 @@
           %td= movie.theatre.title
 - else
   .empty-table You don't have any movies stored.
-
-.row
-  .large-12.columns
-    .panel
-      %pre= JSON.pretty_generate(@output)
-    #{@output}

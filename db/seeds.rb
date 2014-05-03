@@ -1,4 +1,4 @@
-Theatre.all.destroy_all
+# Theatre.all.destroy_all
 Theatre.create(
   zip_code: 80222,
   title: 'Regal Continental Stadium',
@@ -15,7 +15,7 @@ Theatre.create(
   address: '310 Harrison Street'
 )
 
-Movie.all.destroy_all
+# Movie.all.destroy_all
 Movie.create(
   title: 'Heat',
   description: 'Hilarious movie with Sandra Bullock and Milissa McCarthy',
