@@ -21,7 +21,7 @@ class OnConnect
       JSON.parse(payload).each do |movie|
         movie['showtimes'].each do |showtime|
           if Theatre.where(remote_id: showtime['theatre']['id']).empty?
-            Theatre.create(remote_id: showtime['theatre']['id'], title: showtime['name'])
+            Theatre.create(remote_id: showtime['theatre']['id'], title: showtime['theatre']['name'])
           end
         end
 
