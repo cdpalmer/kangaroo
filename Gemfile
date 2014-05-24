@@ -14,6 +14,11 @@ gem 'haml-rails'
 gem 'foundation-rails'
 gem 'faraday'
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
 group :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
