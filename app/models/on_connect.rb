@@ -29,10 +29,11 @@ class OnConnect
         # will only be linked to the last theatre created
         tid = Theatre.last.id
 
-        Movie.create(title: movie['title'],
+        mov = Movie.create(title: movie['title'],
                      description: movie['shortDescription'],
                      duration: calc_movie_length(movie['runTime']),
                      theatre_id: tid)
+        Showtime.create(theatre_id: tid, movie_id: mov.id, start_time: Time.now.to_s)
       end
     rescue MultiJson::LoadError => error
       raise error

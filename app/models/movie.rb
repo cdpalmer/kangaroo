@@ -1,3 +1,4 @@
 class Movie < ActiveRecord::Base
-  belongs_to :theatre
+  has_many :theatres, through: :showtimes
+  has_many :showtimes
 end
