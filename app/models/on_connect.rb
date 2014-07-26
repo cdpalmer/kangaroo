@@ -11,7 +11,8 @@ class OnConnect
 
   def find_by_zipcode(zip)
     today = Date.today.strftime("%Y-%m-%d")
-    zip_endpoint = "?startDate=#{today}&zip=#{zip}&api_key=zwhkp5tk7wenzuvmnavq5f8k"
+    radpar = "25"
+    zip_endpoint = "?startDate=#{today}&zip=#{zip}&radius=#{radius}&units=mi&api_key=zwhkp5tk7wenzuvmnavq5f8k"
     output = @connection.get zip_endpoint
     output.body
   end
@@ -19,21 +20,17 @@ class OnConnect
   def parse_zipcode_payload(payload)
     begin
       JSON.parse(payload).each do |movie|
-        movie['showtimes'].each do |showtime|
-          if Theatre.where(remote_id: showtime['theatre']['id']).empty?
-            Theatre.create(remote_id: showtime['theatre']['id'], title: showtime['theatre']['name'])
-          end
-        end
-
-        # This is until I get the showtime model created, so each movie
-        # will only be linked to the last theatre created
-        tid = Theatre.last.id
-
-        mov = Movie.create(title: movie['title'],
+        mov = Movie.find_or_create_by(title: movie['title'],
                      description: movie['shortDescription'],
-                     duration: calc_movie_length(movie['runTime']),
-                     theatre_id: tid)
-        Showtime.create(theatre_id: tid, movie_id: mov.id, start_time: Time.now.to_s)
+                     duration: calc_movie_length(movie['runTime']))
+        movie['showtimes'].each do |showtime|
+          tid = showtime['theatre']['id']
+
+          Theatre.find_or_create_by(id: tid, title: showtime['theatre']['name'])
+          Showtime.find_or_create_by(theatre_id: tid,
+                                     movie_id: mov.id,
+                                     start_time: 'not important')
+        end
       end
     rescue MultiJson::LoadError => error
       raise error
@@ -41,12 +38,16 @@ class OnConnect
   end
 
   def calc_movie_length(runtime)
-    hour_block = /\d{2}H/
-    hour_digit = /\d{2}/
-    hours = runtime[hour_block][hour_digit]
-    minute_block = /\d{2}M/
-    minute_digit = /\d{2}/
-    minutes = runtime[minute_block][minute_digit]
-    hours.to_i * 60 + minutes.to_i
+    if runtime
+      hour_block = /\d{2}H/
+      hour_digit = /\d{2}/
+      hours = runtime[hour_block][hour_digit]
+      minute_block = /\d{2}M/
+      minute_digit = /\d{2}/
+      minutes = runtime[minute_block][minute_digit]
+      hours.to_i * 60 + minutes.to_i
+    else
+      'n/a'
+    end
   end
 end

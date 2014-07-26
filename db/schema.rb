@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 20140511222207) do
     t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "remote_id"
   end
 
 end

@@ -15,7 +15,7 @@ describe OnConnect do
         "Divergent",
         "Dom Hemingway",
         "Draft Day"
-      ]
+      ].sort
     }
     let(:webmock_theatres) {
       [
@@ -26,7 +26,7 @@ describe OnConnect do
         "UA Colorado Center Stadium 9 & IMAX",
         "Mayan Theatre",
         "Greenwood Village"
-      ]
+      ].sort
     }
 
     before :each do
@@ -37,14 +37,14 @@ describe OnConnect do
       processed_movie_titles = Movie.all.map(&:title)
 
       expect( Movie.count ).to eq(10)
-      expect( processed_movie_titles ).to eq(webmock_titles)
+      expect( processed_movie_titles.sort ).to eq(webmock_titles)
     end
 
     it 'creates the correct theatres' do
       processed_movie_theatres = Theatre.all.map(&:title)
 
       expect( Theatre.count ).to eq(7)
-      expect( processed_movie_theatres ).to eq(webmock_theatres)
+      expect( processed_movie_theatres.sort ).to eq(webmock_theatres)
     end
   end
 
