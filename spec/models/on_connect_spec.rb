@@ -49,7 +49,7 @@ describe OnConnect do
     it 'creates the correct showtimes' do
       processed_showtimes = Showtime.all
 
-      expect( processed_showtimes.count ).to eq(99)
+      expect( processed_showtimes.count ).to eq(89)
     end
   end
 

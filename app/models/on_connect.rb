@@ -29,7 +29,7 @@ class OnConnect
           Theatre.find_or_create_by(id: tid, title: showtime['theatre']['name'])
           Showtime.find_or_create_by(theatre_id: tid,
                                      movie_id: mov.id,
-                                     start_time: 'not important')
+                                     start_time: showtime['dateTime'])
         end
       end
     rescue MultiJson::LoadError => error
