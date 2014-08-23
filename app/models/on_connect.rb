@@ -11,7 +11,7 @@ class OnConnect
 
   def find_by_zipcode(zip)
     today = Date.today.strftime("%Y-%m-%d")
-    radpar = "25"
+    radius = "25"
     zip_endpoint = "?startDate=#{today}&zip=#{zip}&radius=#{radius}&units=mi&api_key=zwhkp5tk7wenzuvmnavq5f8k"
     output = @connection.get zip_endpoint
     output.body

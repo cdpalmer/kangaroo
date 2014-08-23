@@ -1,5 +1,7 @@
 Kangaroo::Application.routes.draw do
   resources :movies
+  resources :theatres
+  resources :showtimes
 
   root 'movies#index'
 

@@ -1,0 +1,13 @@
+%h1.title= @movie.title
+
+%table
+  %thead
+    %th Short Description
+    %th Duration (in minutes)
+    %th Showing in these theatres
+  %tbody
+    %tr
+      %td= @movie.description
+      %td= @movie.duration.to_int
+      %td= @movie.theatres.map(&:title).join(", ")
+
