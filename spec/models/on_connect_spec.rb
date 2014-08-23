@@ -10,7 +10,6 @@ describe OnConnect do
         "Bears",
         "Brick Mansions",
         "Captain America: The Winter Soldier",
-        "Captain America: The Winter Soldier -- An IMAX 3D Experience",
         "Cesar Chavez",
         "Divergent",
         "Dom Hemingway",
@@ -36,15 +35,21 @@ describe OnConnect do
     it 'creates the correct movies' do
       processed_movie_titles = Movie.all.map(&:title)
 
-      expect( Movie.count ).to eq(10)
+      expect( Movie.count ).to eq(webmock_titles.count)
       expect( processed_movie_titles.sort ).to eq(webmock_titles)
     end
 
     it 'creates the correct theatres' do
       processed_movie_theatres = Theatre.all.map(&:title)
 
-      expect( Theatre.count ).to eq(7)
+      expect( Theatre.count ).to eq(webmock_theatres.count)
       expect( processed_movie_theatres.sort ).to eq(webmock_theatres)
+    end
+
+    it 'creates the correct showtimes' do
+      processed_showtimes = Showtime.all
+
+      expect( processed_showtimes.count ).to eq(99)
     end
   end
 
