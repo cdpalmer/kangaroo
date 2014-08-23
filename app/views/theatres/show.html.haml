@@ -1,0 +1,10 @@
+%h1.title= @theatre.title
+
+%table.show-table
+  %thead
+    %th Theatre
+    %th Movies
+  %tbody
+    %tr
+      %td= @theatre.title
+      %td= @theatre.movies.uniq.map(&:title).join(", ")

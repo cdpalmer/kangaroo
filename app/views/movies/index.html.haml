@@ -13,6 +13,9 @@
           %td= movie.title
           %td= movie.description
           %td.duration= movie.duration.to_int
-          %td= movie.theatres.uniq.map(&:title).join(", ")
+          %td
+            - movie.theatres.uniq.map(&:title).each do |title|
+              = title
+              %br
 - else
   .empty-warning You don't have any movies stored. Please request for your zipcode.

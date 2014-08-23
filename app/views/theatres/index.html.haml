@@ -1,0 +1,17 @@
+%h1.title Theatres
+
+- if !@theatres.empty?
+  %table.show-table
+    %thead
+      %th Theatre
+      %th Movies showing
+    %tbody
+      - @theatres.each do |theatre|
+        %tr
+          %td= theatre.title
+          %td
+            - theatre.movies.uniq.map(&:title).each do |m|
+              = m
+              %br
+- else
+  .empty-warning You don't have any movies stored. Please request for your zipcode.
