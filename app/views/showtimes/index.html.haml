@@ -1,0 +1,15 @@
+%h1.title Showtimes
+
+%table.show-table
+  %thead
+    %th Movie
+    %th Theatre
+    %th Start Time
+    %th End Time
+  %tbody
+    - @showtimes.each do |st|
+      %tr
+        %td= st.movie.title
+        %td= st.theatre.title
+        %td= st.start_time
+        %td= determine_end_time(st.start_time, st.movie.duration)
