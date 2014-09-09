@@ -61,4 +61,10 @@ describe OnConnect do
       expect( output ).to eq 94
     end
   end
+
+  describe 'start_time' do
+    it 'saves as Time object (in string format)' do
+      expect(1).to eq(2)
+    end
+  end
 end
