@@ -11,5 +11,5 @@
       %tr
         %td= st.movie.title
         %td= st.theatre.title
-        %td= st.start_time
-        %td= determine_end_time(st.start_time, st.movie.duration)
+        %td= Time.at(st.start_time).to_s(:date_time_and_zone)
+        %td= Time.at(determine_end_time(st.start_time, st.movie.duration)).to_s(:date_time_and_zone)
