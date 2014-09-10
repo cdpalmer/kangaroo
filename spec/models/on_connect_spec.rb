@@ -62,9 +62,13 @@ describe OnConnect do
     end
   end
 
-  describe 'start_time' do
-    it 'saves as Time object (in string format)' do
-      expect(1).to eq(2)
+  describe '#calc_time_from_epoch' do
+    it 'returns correct seconds from epoch ' do
+      example_time = '2014-04-27T14:40'
+      epoch_time = Time.new(2014, 4, 27, 14, 40)
+      output = subject.calc_time_from_epoch(example_time)
+
+      expect( output ).to eq epoch_time.to_i
     end
   end
 end

@@ -29,12 +29,32 @@ class OnConnect
           Theatre.find_or_create_by(id: tid, title: showtime['theatre']['name'])
           Showtime.find_or_create_by(theatre_id: tid,
                                      movie_id: mov.id,
-                                     start_time: showtime['dateTime'])
+                                     start_time: calc_time_from_epoch(showtime['dateTime']))
         end
       end
     rescue MultiJson::LoadError => error
       raise error
     end
+  end
+
+  def calc_time_from_epoch(timestamp)
+    year_block = /\d{4}-/
+    year_format = /\d{4}/
+    year = timestamp[year_block][year_format]
+    month_block = /-\d+-/
+    month_format = /\d+/
+    month = timestamp[month_block][month_format]
+    day_block = /-\d+T/
+    day_format = /\d+/
+    day = timestamp[day_block][day_format]
+    hour_block = /T\d+/
+    hour_format = /\d+/
+    hour = timestamp[hour_block][hour_format]
+    minute_block = /:\d+/
+    minute_format = /\d+/
+    minute = timestamp[minute_block][minute_format]
+
+    Time.new(year, month, day, hour, minute).to_i
   end
 
   def calc_movie_length(runtime)
