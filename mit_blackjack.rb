@@ -5,34 +5,14 @@ class BlackJackPlayer
   attr_accessor :name
   attr_accessor :current_hand
   attr_accessor :current_bet
-  attr_accessor :current_count
   attr_accessor :dealer_hand
-  TRANSLATION_HASH = {
-    tree: 1,
-    switch: 2,
-    stool: 3,
-    car: 4,
-    glove: 5,
-    gun: 6,
-    craps: 7,
-    pool: 8,
-    cat: 9,
-    bowling: 10,
-    football: 11,
-    eggs: 12,
-    witch: 13,
-    ring: 14,
-    paycheck: 15,
-    sweet: 16,
-    magazine: 17
-  }
 
   def initialize(name = "Cody", betting_unit = 5)
     @betting_unit = betting_unit
     @name = name
     @current_bet = "No bet"
     @current_hand = "No hand"
-    @current_count = "I don't know"
+    @dealer_hand = "No hand"
   end
 
   def print
@@ -43,9 +23,7 @@ class BlackJackPlayer
     puts "- Betting unit:  #{@betting_unit}"
     puts "- Current Hand:  #{@current_hand}"
     puts "- Current Bet:   #{@current_bet}"
-    puts "- Current Count: #{@current_count}"
     puts "- Dealer Hand:   #{@dealer_hand}"
-    puts
     puts
   end
 
@@ -84,10 +62,12 @@ class BlackJackPlayer
     puts
     puts "Dealer is showing a #{@dealer_hand}"
     while @dealer_hand < 17
+      sleep 1
       card = [*2..10].sample
       @dealer_hand += card
       puts "  dealer was dealt a #{card} => Total: #{@dealer_hand}"
     end
+    sleep 1
     if @dealer_hand > 21
       puts "  and BUSTED with a hand of #{@dealer_hand}"
       puts
@@ -99,9 +79,9 @@ class BlackJackPlayer
         puts "#{@name} has LOST #{number_to_currency(@current_bet)}!"
       else
         if @dealer_hand == @current_hand
-          puts "#{@name} has won #{number_to_currency(@current_bet)}!"
-        else
           puts "#{@name} has PUSHED"
+        else
+          puts "#{@name} has won #{number_to_currency(@current_bet)}!"
         end
       end
     end
@@ -120,14 +100,37 @@ class BlackJackPlayer
 end
 
 class Gorilla < BlackJackPlayer
-  def initialize(name = "Cody")
+  def initialize(name = "Jack")
     super(name, 100)
   end
 end
 
 class Spotter < BlackJackPlayer
-  def initialize(name = "Cody")
+  attr_reader :translation_hash
+  attr_accessor :current_count
+
+  def initialize(name = "Kevin")
     super(name)
+    @current_count = 1
+    @translation_hash = {
+      tree: 1,
+      switch: 2,
+      stool: 3,
+      car: 4,
+      glove: 5,
+      gun: 6,
+      craps: 7,
+      pool: 8,
+      cat: 9,
+      bowling: 10,
+      football: 11,
+      eggs: 12,
+      witch: 13,
+      ring: 14,
+      paycheck: 15,
+      sweet: 16,
+      magazine: 17
+    }
   end
 
   def record_the_count(count = 1)
@@ -135,22 +138,51 @@ class Spotter < BlackJackPlayer
   end
 
   def announce_the_count
-    keyword = TRANSLATION_HASH.select { |key, value| value == @current_count }.keys.first.to_s
+    keyword = @translation_hash.select { |key, value| value == @current_count }.keys.first.to_s
     return "How do you say '#{keyword}' in Spanish?  Anyone?"
   end
 
   def dismiss
     return "#{@name} says: 'Jack Black in the movie King Kong was terrible'"
   end
+
+  def print
+    super
+    puts "- Current Count: #{@current_count}"
+    puts
+  end
 end
 
 class BigPlayer < BlackJackPlayer
+  attr_reader :translation_hash
+  attr_accessor :current_count
+
   def initialize(name = "Cody")
     super(name, 150)
+    @current_count = 1
+    @translation_hash = {
+      tree: 1,
+      switch: 2,
+      stool: 3,
+      car: 4,
+      glove: 5,
+      gun: 6,
+      craps: 7,
+      pool: 8,
+      cat: 9,
+      bowling: 10,
+      football: 11,
+      eggs: 12,
+      witch: 13,
+      ring: 14,
+      paycheck: 15,
+      sweet: 16,
+      magazine: 17
+    }
   end
 
-  def bet
-    @current_bet = @current_count * @betting_unit
+  def bet(count = @current_count)
+    @current_bet = count * @betting_unit
     puts "#{@name} is betting #{number_to_currency(@current_bet)}, according to the count"
   end
 
@@ -158,13 +190,19 @@ class BigPlayer < BlackJackPlayer
     statement.downcase!
     words = statement.split(" ")
     words.each { |w| w.gsub!(/[^a-z]/i, '') }
-    keywords = TRANSLATION_HASH.keys.map { |k| k.to_s }
+    keywords = @translation_hash.keys.map { |k| k.to_s }
     keyword = (keywords & words).first
     if keyword
-      @current_count = TRANSLATION_HASH[keyword.to_sym]
+      @current_count = @translation_hash[keyword.to_sym]
     else
       @current_count = 1
     end
     return "#{@name} thinks: 'Nice, so the count is #{@current_count}'"
+  end
+
+  def print
+    super
+    puts "- Current Count: #{@current_count}"
+    puts
   end
 end
