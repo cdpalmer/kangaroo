@@ -28,7 +28,7 @@ class BlackJackPlayer
   end
 
   def bet
-    @current_bet = @betting_unit
+    @current_bet ||= @betting_unit
     puts "#{@name} is betting #{number_to_currency(@current_bet)}"
   end
 
@@ -106,31 +106,12 @@ class Gorilla < BlackJackPlayer
 end
 
 class Spotter < BlackJackPlayer
-  attr_reader :translation_hash
+  include Translation
   attr_accessor :current_count
 
   def initialize(name = "Kevin")
     super(name)
     @current_count = 1
-    @translation_hash = {
-      tree: 1,
-      switch: 2,
-      stool: 3,
-      car: 4,
-      glove: 5,
-      gun: 6,
-      craps: 7,
-      pool: 8,
-      cat: 9,
-      bowling: 10,
-      football: 11,
-      eggs: 12,
-      witch: 13,
-      ring: 14,
-      paycheck: 15,
-      sweet: 16,
-      magazine: 17
-    }
   end
 
   def record_the_count(count = 1)
@@ -138,7 +119,7 @@ class Spotter < BlackJackPlayer
   end
 
   def announce_the_count
-    keyword = @translation_hash.select { |key, value| value == @current_count }.keys.first.to_s
+    keyword = Translation.table.select { |key, value| value == @current_count }.keys.first.to_s
     return "How do you say '#{keyword}' in Spanish?  Anyone?"
   end
 
@@ -153,36 +134,42 @@ class Spotter < BlackJackPlayer
   end
 end
 
+module Translation
+  def self.table
+    {
+      tree:     1,
+      switch:   2,
+      stool:    3,
+      car:      4,
+      glove:    5,
+      gun:      6,
+      craps:    7,
+      pool:     8,
+      cat:      9,
+      bowling:  10,
+      football: 11,
+      eggs:     12,
+      witch:    13,
+      ring:     14,
+      paycheck: 15,
+      sweet:    16,
+      magazine: 17
+    }
+  end
+end
+
 class BigPlayer < BlackJackPlayer
-  attr_reader :translation_hash
+  include Translation
   attr_accessor :current_count
 
   def initialize(name = "Cody")
     super(name, 150)
     @current_count = 1
-    @translation_hash = {
-      tree: 1,
-      switch: 2,
-      stool: 3,
-      car: 4,
-      glove: 5,
-      gun: 6,
-      craps: 7,
-      pool: 8,
-      cat: 9,
-      bowling: 10,
-      football: 11,
-      eggs: 12,
-      witch: 13,
-      ring: 14,
-      paycheck: 15,
-      sweet: 16,
-      magazine: 17
-    }
   end
 
-  def bet(count = @current_count)
-    @current_bet = count * @betting_unit
+  def bet(count = nil)
+    @current_count = count if count
+    @current_bet = @current_count * @betting_unit
     puts "#{@name} is betting #{number_to_currency(@current_bet)}, according to the count"
   end
 
@@ -190,10 +177,10 @@ class BigPlayer < BlackJackPlayer
     statement.downcase!
     words = statement.split(" ")
     words.each { |w| w.gsub!(/[^a-z]/i, '') }
-    keywords = @translation_hash.keys.map { |k| k.to_s }
+    keywords = Translation.table.keys.map { |k| k.to_s }
     keyword = (keywords & words).first
     if keyword
-      @current_count = @translation_hash[keyword.to_sym]
+      @current_count = Translation.table[keyword.to_sym]
     else
       @current_count = 1
     end
