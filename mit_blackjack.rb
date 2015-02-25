@@ -10,7 +10,7 @@ class BlackJackPlayer
   def initialize(name = "Cody", betting_unit = 5)
     @betting_unit = betting_unit
     @name = name
-    @current_bet = "No bet"
+    @current_bet = betting_unit
     @current_hand = "No hand"
     @dealer_hand = "No hand"
   end
@@ -105,6 +105,30 @@ class Gorilla < BlackJackPlayer
   end
 end
 
+module Translation
+  def self.table
+    {
+      tree:     1,
+      switch:   2,
+      stool:    3,
+      car:      4,
+      glove:    5,
+      gun:      6,
+      craps:    7,
+      pool:     8,
+      cat:      9,
+      bowling:  10,
+      football: 11,
+      eggs:     12,
+      witch:    13,
+      ring:     14,
+      paycheck: 15,
+      sweet:    16,
+      magazine: 17
+    }
+  end
+end
+
 class Spotter < BlackJackPlayer
   include Translation
   attr_accessor :current_count
@@ -131,30 +155,6 @@ class Spotter < BlackJackPlayer
     super
     puts "- Current Count: #{@current_count}"
     puts
-  end
-end
-
-module Translation
-  def self.table
-    {
-      tree:     1,
-      switch:   2,
-      stool:    3,
-      car:      4,
-      glove:    5,
-      gun:      6,
-      craps:    7,
-      pool:     8,
-      cat:      9,
-      bowling:  10,
-      football: 11,
-      eggs:     12,
-      witch:    13,
-      ring:     14,
-      paycheck: 15,
-      sweet:    16,
-      magazine: 17
-    }
   end
 end
 
