@@ -148,7 +148,7 @@ class Spotter < BlackJackPlayer
   end
 
   def dismiss
-    return "#{@name} says: 'Jack Black in the movie King Kong was terrible'"
+    return "#{@name} says: 'Jack Black in the movie King Kong was terrible, but I still watched it.'"
   end
 
   def print
