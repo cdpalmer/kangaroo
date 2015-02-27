@@ -8,5 +8,23 @@
   %tbody
     %tr
       %td= @theatre.title
-      %td= @theatre.movies.uniq.map(&:title).join(", ")
+      %td
+        - @theatre.movies.uniq.each do |movie|
+          = movie.title
+          %br
       %td= @theatre.marathons.count
+
+%table.show-table
+  %thead
+    %th{colspan: '2'} Marathons
+  %tbody
+    - @marathons.each do |marathon|
+      %tr
+        %td
+          - marathon.each do |showtime|
+            = showtime.movie.title
+            %br
+        %td
+          - marathon.each do |showtime|
+            = Time.at(showtime.start_time).to_s(:date_time_and_zone)
+            %br

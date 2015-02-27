@@ -9,5 +9,6 @@ class TheatresController < ApplicationController
 
   def show
     @theatre = Theatre.find(params[:id])
+    @marathons = @theatre.marathons
   end
 end
