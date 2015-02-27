@@ -5,13 +5,15 @@
     %thead
       %th Theatre
       %th Movies showing
+      %th Marathon Count
     %tbody
       - @theatres.each do |theatre|
         %tr
           %td= theatre.title
           %td
-            - theatre.movies.uniq.map(&:title).each do |m|
-              = m
+            - theatre.movies.uniq.each do |m|
+              = m.title
               %br
+          %td= theatre.marathons.count
 - else
   .empty-warning You don't have any movies stored. Please request for your zipcode.
