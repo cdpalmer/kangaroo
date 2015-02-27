@@ -2,7 +2,7 @@ class OnConnect
   require 'net/http'
 
   def initialize
-    @endpoint = "http://data.tmsapi.com/v1/movies/showings/"
+    @endpoint = "http://data.tmsapi.com/v1.1/movies/showings/"
     @connection = Faraday.new(url: @endpoint) do |faraday|
       faraday.request   :url_encoded
       faraday.adapter   Faraday.default_adapter

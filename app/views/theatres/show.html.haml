@@ -4,7 +4,9 @@
   %thead
     %th Theatre
     %th Movies
+    %th Marathon count
   %tbody
     %tr
       %td= @theatre.title
       %td= @theatre.movies.uniq.map(&:title).join(", ")
+      %td= @theatre.marathons.count
