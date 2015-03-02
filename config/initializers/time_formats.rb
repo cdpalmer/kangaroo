@@ -3,6 +3,7 @@ Time::DATE_FORMATS[:us_date] = '%m-%d-%y'
 Time::DATE_FORMATS[:us_date_slashes] = '%m/%d/%y'
 Time::DATE_FORMATS[:short_date] = '%m%d%y'
 Time::DATE_FORMATS[:time_with_zone] = '%H:%M %Z'
+Time::DATE_FORMATS[:time] = '%l:%M %p - %B %d'
 
 Time::DATE_FORMATS[:date_time_and_zone] = '%m/%d/%Y %H:%M %Z'
 Time::DATE_FORMATS[:date_with_time] = '%H:%M %b %d %Y'

@@ -26,5 +26,5 @@
             %br
         %td
           - marathon.each do |showtime|
-            = Time.at(showtime.start_time).to_s(:date_time_and_zone)
+            = Time.at(showtime.start_time).to_s(:time)
             %br
