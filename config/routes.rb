@@ -3,6 +3,8 @@ Kangaroo::Application.routes.draw do
   resources :theatres
   resources :showtimes
 
+  resources :queries
+
   root 'movies#index'
 
 
