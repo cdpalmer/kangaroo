@@ -12,6 +12,11 @@ class QueriesController < ApplicationController
         redirect_to movies_path, notice: "That zip has already been searched today."
       else
         @query.save
+        movie_service = MovieService.new
+        # output = movie_service.find_by_zipcode(@query.zip_code)
+        # movie_service.parse_zipcode_payload(output)
+        movie_service.parse_zipcode_payload(
+          WebmockOnconnectResponse.zipcode_response(80222))
         redirect_to movies_path
       end
     else

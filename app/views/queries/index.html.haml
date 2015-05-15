@@ -1,8 +1,11 @@
-%h2 These are all the queries done today:
+.existing-zips
+  %h2 Today's zip codes:
+  - @queries.each do |q|
+    %h3= q.zip_code
+  - if @queries.empty?
+    %h3 No queries done today
 
-- @queries.each do |q|
-  %h3= q.zip_code
-
-= simple_form_for @zip_code do |f|
-  = f.input :zip_code
-  = f.button :submit
+  .large-9.columns
+    = simple_form_for @zip_code do |f|
+      = f.input :zip_code, label: false
+      = f.button :submit, "Find your movies!"
