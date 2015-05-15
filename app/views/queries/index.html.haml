@@ -1,4 +1,8 @@
 %h2 These are all the queries done today:
 
--# - @queries.each do |q|
-  -# %h3= q.zip_code
+- @queries.each do |q|
+  %h3= q.zip_code
+
+= simple_form_for @zip_code do |f|
+  = f.input :zip_code
+  = f.button :submit
