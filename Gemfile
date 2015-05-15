@@ -13,6 +13,7 @@ gem 'figaro'
 gem 'haml-rails'
 gem 'foundation-rails'
 gem 'faraday'
+gem 'simple_form'
 
 group :development do
   gem 'better_errors'
