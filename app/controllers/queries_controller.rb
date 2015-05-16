@@ -13,21 +13,14 @@ class QueriesController < ApplicationController
       else
         @query.save
         movie_service = MovieService.new
-        # output = movie_service.find_by_zipcode(@query.zip_code)
-        # movie_service.parse_zipcode_payload(output)
-        movie_service.parse_zipcode_payload(
-          WebmockOnconnectResponse.zipcode_response(80222))
+        output = movie_service.find_by_zipcode(@query.zip_code)
+        movie_service.parse_zipcode_payload(output)
         redirect_to movies_path
       end
     else
       redirect_to queries_path, alert: "Zip must be a 5 digit number"
     end
 
-    # Create new query in db and run query against movie service endpoint
-    # @movie_service = MovieService.new
-    # output = @movie_service.find_by_zipcode(80222)
-    # @movie_service.parse_zipcode_payload(output)
-    #
     # -- Or run against mocked response for local debugging --
     # @movie_service.parse_zipcode_payload(
     #   WebmockOnconnectResponse.zipcode_response(80222))
@@ -37,11 +30,6 @@ private
 
   def query_params
     params[:query].permit(:zip_code)
-  end
-
-  def valid_zip?
-    zip = query_params[:zip_code][/\A\d{5}\z/]
-    Query.all.map(&:zip_code).include?(zip.to_i) if zip
   end
 
   def known_zip?(zip)
