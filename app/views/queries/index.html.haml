@@ -1,11 +1,12 @@
-.existing-zips
-  %h2 Today's zip codes:
-  - @queries.each do |q|
-    %h3= q.zip_code
-  - if @queries.empty?
-    %h3 No queries done today
+.query-container
+  .existing-zips
+    %h2 Today's zip codes:
+    - @queries.each do |q|
+      %h3= q.zip_code
+    - if @queries.empty?
+      %h3 No queries done today
 
-  .large-9.columns
-    = simple_form_for @zip_code do |f|
-      = f.input :zip_code, label: false
-      = f.button :submit, "Find your movies!"
+    .large-9.columns
+      = simple_form_for @zip_code do |f|
+        = f.input :zip_code, label: false
+        = f.button :submit, "Find your movies!"

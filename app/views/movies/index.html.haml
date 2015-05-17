@@ -5,17 +5,18 @@
     %thead
       %th Title
       %th Short Description
-      %th Duration (in minutes)
-      %th Theatres
+      %th Duration
     %tbody
       - @movies.each do |movie|
         %tr.movie{data_id: movie.id}
           %td= movie.title
           %td= movie.description
-          %td.duration= movie.duration.to_int
-          %td
-            - movie.theatres.uniq.map(&:title).each do |title|
-              = title
-              %br
+          %td.duration= duration_print(movie.duration.to_int)
+        %tr
+          %td{colspan: 3}
+            - movie.theatres.uniq.each_with_index do |theatre, index|
+              - if index != 0
+                = ", "
+              %a{href: theatre_path(theatre)}= theatre.title
 - else
   .empty-warning You don't have any movies stored. Please request for your zipcode.
