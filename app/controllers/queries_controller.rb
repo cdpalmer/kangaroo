@@ -1,5 +1,7 @@
 class QueriesController < ApplicationController
   def index
+    wipe_old_data unless Query.last.created_at.today?
+
     @queries = Query.all
     @zip_code = Query.new
   end
@@ -27,6 +29,12 @@ class QueriesController < ApplicationController
   end
 
 private
+
+  def wipe_old_data
+    Query.destroy_all
+    Showtime.destroy_all
+    Movie.destroy_all
+  end
 
   def query_params
     params[:query].permit(:zip_code)
