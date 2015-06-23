@@ -17,7 +17,7 @@ class QueriesController < ApplicationController
         movie_service = MovieService.new
         output = movie_service.find_by_zipcode(@query.zip_code)
         movie_service.parse_zipcode_payload(output)
-        redirect_to movies_path
+        redirect_to movies_path(zip: @query.zip_code)
       end
     else
       redirect_to queries_path, alert: "Zip must be a 5 digit number"
