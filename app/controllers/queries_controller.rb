@@ -1,6 +1,6 @@
 class QueriesController < ApplicationController
   def index
-    wipe_old_data unless Query.last.created_at.today?
+    wipe_old_data if Query.last && !Query.last.created_at.today?
 
     @queries = Query.all
     @zip_code = Query.new
