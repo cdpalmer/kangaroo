@@ -6,7 +6,7 @@
     - if @queries.empty?
       %h3 No queries done today
 
-    .large-9.columns
+    .large-12.columns
       = simple_form_for @zip_code do |f|
-        = f.input :zip_code, label: false
+        = f.input :zip_code, label: false, type: 'number', pattern: "\d*"
         = f.button :submit, "Find your movies!"
