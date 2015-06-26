@@ -10,6 +10,5 @@ module Kangaroo
     I18n.enforce_available_locales = false
 
     config.remote_movie_service = ::OnConnect.new
-    config.serve_static_assets = true
   end
 end

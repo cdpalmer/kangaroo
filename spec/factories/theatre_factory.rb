@@ -1,5 +1,7 @@
+require 'ffaker'
+
 FactoryGirl.define do
   factory :theatre do
-    title { Faker::Name.name }
+    title { FFaker::Name.first_name }
   end
 end

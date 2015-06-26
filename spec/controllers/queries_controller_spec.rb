@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe QueriesController do
   describe 'POST create' do
-    let(:local_zip) { Faker::AddressUS.zip_code }
+    let(:local_zip) { FFaker::AddressUS.zip_code }
 
     it 'only creates new query if it does not exist' do
       Query.create(zip_code: local_zip)
