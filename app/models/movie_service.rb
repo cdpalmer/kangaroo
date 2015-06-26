@@ -7,7 +7,7 @@ class MovieService
     @remote_movie_service.find_by_zipcode(zipcode)
   end
 
-  def parse_zipcode_payload(payload)
-    @remote_movie_service.parse_zipcode_payload(payload)
+  def parse_zipcode_payload(payload,zip)
+    @remote_movie_service.parse_zipcode_payload(payload,zip)
   end
 end

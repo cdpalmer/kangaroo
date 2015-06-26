@@ -17,7 +17,7 @@ class OnConnect
     output.body
   end
 
-  def parse_zipcode_payload(payload)
+  def parse_zipcode_payload(payload, zip)
     begin
       JSON.parse(payload).each do |movie|
         mov = Movie.find_or_create_by(title: movie['title'],
@@ -26,7 +26,9 @@ class OnConnect
         movie['showtimes'].each do |showtime|
           tid = showtime['theatre']['id']
 
-          Theatre.find_or_create_by(id: tid, title: showtime['theatre']['name'])
+          Theatre.find_or_create_by(id: tid,
+                                    title: showtime['theatre']['name'])
+          # ZipCode.find_or_create_by(zip_code: zip)
           Showtime.find_or_create_by(theatre_id: tid,
                                      movie_id: mov.id,
                                      start_time: calc_time_from_epoch(showtime['dateTime']))

@@ -16,7 +16,7 @@ class QueriesController < ApplicationController
         @query.save
         movie_service = MovieService.new
         output = movie_service.find_by_zipcode(@query.zip_code)
-        movie_service.parse_zipcode_payload(output)
+        movie_service.parse_zipcode_payload(output, @query.zip_code)
         redirect_to movies_path(zip: @query.zip_code)
       end
     else

@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe OnConnect do
   describe '#parse_zipcode_payload' do
-    let(:onconnect_payload) { WebmockOnconnectResponse.zipcode_response(80222) }
+    let(:zip) { 80222 }
+    let(:onconnect_payload) { WebmockOnconnectResponse.zipcode_response(zip) }
     let(:webmock_titles) {
       [
         "300: Rise of an Empire",
@@ -29,7 +30,7 @@ describe OnConnect do
     }
 
     before :each do
-      subject.parse_zipcode_payload(onconnect_payload)
+      subject.parse_zipcode_payload(onconnect_payload, zip)
     end
 
     it 'creates the correct movies' do
