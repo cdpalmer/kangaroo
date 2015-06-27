@@ -8,5 +8,5 @@
 
     .large-12.columns
       = simple_form_for @zip_code do |f|
-        = f.input :zip_code, label: false, type: 'tel'
+        = f.input :zip_code, label: false, as: :tel
         = f.button :submit, "Find your movies!"
