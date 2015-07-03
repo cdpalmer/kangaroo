@@ -25,10 +25,13 @@ class OnConnect
                      duration: calc_movie_length(movie['runTime']))
         movie['showtimes'].each do |showtime|
           tid = showtime['theatre']['id']
-
-          Theatre.find_or_create_by(id: tid,
-                                    title: showtime['theatre']['name'])
-          # ZipCode.find_or_create_by(zip_code: zip)
+          z = Zipcode.find_or_create_by(value: zip.to_s)
+          t = Theatre.find_or_create_by(id: tid)
+          t.title = showtime['theatre']['name']
+          t.zipcodes << z unless t.zipcodes.include?(z)
+          z.theatres << t unless z.theatres.include?(t)
+          t.save!
+          z.save!
           Showtime.find_or_create_by(theatre_id: tid,
                                      movie_id: mov.id,
                                      start_time: calc_time_from_epoch(showtime['dateTime']))

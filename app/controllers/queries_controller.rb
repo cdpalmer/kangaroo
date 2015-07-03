@@ -1,3 +1,5 @@
+require './spec/support/webmock_onconnect_responses'
+
 class QueriesController < ApplicationController
   def index
     wipe_old_data if Query.last && !Query.last.created_at.today?
@@ -17,15 +19,15 @@ class QueriesController < ApplicationController
         movie_service = MovieService.new
         output = movie_service.find_by_zipcode(@query.zip_code)
         movie_service.parse_zipcode_payload(output, @query.zip_code)
-        redirect_to movies_path(zip: @query.zip_code)
+        redirect_to theatres_path(zip_code: @query.zip_code)
       end
     else
       redirect_to queries_path, alert: "Zip must be a 5 digit number"
     end
 
     # -- Or run against mocked response for local debugging --
-    # @movie_service.parse_zipcode_payload(
-    #   WebmockOnconnectResponse.zipcode_response(80222))
+        # movie_service.parse_zipcode_payload(
+          # WebmockOnconnectResponse.zipcode_response(80222), 80222)
   end
 
 private

@@ -1,6 +1,7 @@
 class Theatre < ActiveRecord::Base
   has_many :movies, through: :showtimes
   has_many :showtimes
+  has_and_belongs_to_many :zipcodes
 
   def marathons
     @hop_window = 15

@@ -2,21 +2,16 @@
 
 %table.show-table
   %thead
-    %th Theatre
     %th Movies
-    %th Marathon count
   %tbody
     %tr
-      %td= @theatre.title
       %td
-        - @theatre.movies.uniq.each do |movie|
-          = movie.title
-          %br
-      %td= @theatre.marathons.count
+        = @theatre.movies.uniq.map(&:title).join(", ")
 
 %table.show-table
   %thead
-    %th{colspan: '2'} Marathons
+    %th{colspan: '2'}
+      = " Marathons (#{@theatre.marathons.count})"
   %tbody
     - @marathons.each do |marathon|
       %tr

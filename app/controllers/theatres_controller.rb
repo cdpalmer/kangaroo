@@ -2,7 +2,13 @@ require './spec/support/webmock_onconnect_responses.rb'
 
 class TheatresController < ApplicationController
   def index
-    @theatres = Theatre.all
+    if params[:zip_code]
+      @reference = params[:zip_code]
+      @theatres = Theatre.select { |t| t.zipcodes.map(&:value).include?(params[:zip_code]) }
+    else
+      @reference = 'all'
+      @theatres = Theatre.all
+    end
   end
 
   def show
