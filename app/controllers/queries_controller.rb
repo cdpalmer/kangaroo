@@ -13,7 +13,7 @@ class QueriesController < ApplicationController
 
     if @query.valid?
       if known_zip?(@query.zip_code)
-        redirect_to movies_path, notice: "That zip has already been searched today."
+        redirect_to theatres_path(zip_code: @query.zip_code), notice: "That zip has already been searched today."
       else
         @query.save
         movie_service = MovieService.new
