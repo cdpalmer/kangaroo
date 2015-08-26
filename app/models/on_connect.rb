@@ -18,6 +18,11 @@ class OnConnect
   end
 
   def parse_zipcode_payload(payload, zip)
+    # This is where I'm timing out. Too many queries and db calls
+    # Look into Res-queue!  Apparently you can use it like a job queue for db
+    # calls.  Make it run in the background.
+    #
+    # Either that or make it an AJAX call that has a loading message/gif
     begin
       JSON.parse(payload).each do |movie|
         mov = Movie.find_or_create_by(title: movie['title'],
