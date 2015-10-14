@@ -13,6 +13,7 @@ class TheatresController < ApplicationController
 
   def show
     @theatre = Theatre.find(params[:id])
+    @movies = @theatre.movies.uniq
     @marathons = @theatre.marathons
   end
 end

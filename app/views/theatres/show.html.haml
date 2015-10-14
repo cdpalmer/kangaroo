@@ -6,7 +6,7 @@
   %tbody
     %tr
       %td
-        = @theatre.movies.uniq.map(&:title).join(", ")
+        = @movies.map(&:title).join(", ")
 
 %table.show-table
   %thead

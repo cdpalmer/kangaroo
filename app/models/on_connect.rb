@@ -18,25 +18,27 @@ class OnConnect
   end
 
   def parse_zipcode_payload(payload, zip)
-    # This is where I'm timing out. Too many queries and db calls
-    # Look into Res-queue!  Apparently you can use it like a job queue for db
-    # calls.  Make it run in the background.
-    #
-    # Either that or make it an AJAX call that has a loading message/gif
     begin
+      payload_movies = []
+      payload_theatres = []
+      z = Zipcode.find_or_create_by(value: zip.to_s)
       JSON.parse(payload).each do |movie|
-        mov = Movie.find_or_create_by(title: movie['title'],
-                     description: movie['shortDescription'],
-                     duration: calc_movie_length(movie['runTime']))
+        unless payload_movies.include?(movie['title'])
+          payload_movies << movie['title']
+          mov = Movie.find_or_create_by(title: movie['title'],
+                       description: movie['shortDescription'],
+                       duration: calc_movie_length(movie['runTime']))
+        end
+
         movie['showtimes'].each do |showtime|
           tid = showtime['theatre']['id']
-          z = Zipcode.find_or_create_by(value: zip.to_s)
-          t = Theatre.find_or_create_by(id: tid)
-          t.title = showtime['theatre']['name']
-          t.zipcodes << z unless t.zipcodes.include?(z)
-          z.theatres << t unless z.theatres.include?(t)
-          t.save!
-          z.save!
+          unless payload_theatres.include?(tid)
+            payload_theatres << tid
+            t = Theatre.find_or_create_by(id: tid,
+                          title: showtime['theatre']['name'])
+            t.zipcodes << z unless t.zipcodes.include?(z)
+            z.theatres << t
+          end
           Showtime.find_or_create_by(theatre_id: tid,
                                      movie_id: mov.id,
                                      start_time: calc_time_from_epoch(showtime['dateTime']))
